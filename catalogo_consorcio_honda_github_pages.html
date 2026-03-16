@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Consórcio Honda</title>
+  <meta name="description" content="Catálogo minimalista e elegante de consórcio Honda, pronto para hospedar no GitHub Pages." />
+  <style>
+    :root {
+      --red: #c8102e;
+      --red-dark: #960c22;
+      --red-soft: #fff2f4;
+      --white: #ffffff;
+      --ink: #18181b;
+      --muted: #5b5b66;
+      --line: #ececf1;
+      --shadow: 0 20px 60px rgba(24, 24, 27, 0.08);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(200, 16, 46, 0.08), transparent 35%),
+        linear-gradient(180deg, #ffffff 0%, #fff8f9 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(236,236,241,0.8);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: var(--white);
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background: linear-gradient(135deg, #ffffff 0%, #fff4f6 100%);
+      border: 1px solid rgba(200,16,46,0.08);
+      box-shadow: var(--shadow);
+      padding: 44px;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,16,46,0.16) 0%, rgba(200,16,46,0) 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--red-soft);
+      color: var(--red-dark);
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.2rem, 4vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .hero-actions, .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: white;
+      box-shadow: 0 16px 30px rgba(200,16,46,0.22);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(236,236,241,0.9);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      padding: 22px 0 14px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+
+    .search-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      min-width: 260px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      outline: none;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.92);
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      padding: 11px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all .2s ease;
+    }
+
+    .chip.active,
+    .chip:hover {
+      border-color: rgba(200,16,46,0.25);
+      background: var(--red-soft);
+      color: var(--red-dark);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      padding: 10px 0 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(236,236,241,0.95);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,16,46,0.12), transparent 70%);
+    }
+
+    .tag-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .tag { background: var(--red-soft); color: var(--red-dark); }
+    .pill { background: #f5f5f7; color: var(--muted); }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .card .segment {
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .credit {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin: 8px 0 2px;
+    }
+
+    .credit-label, .monthly-label { color: var(--muted); font-size: 0.9rem; }
+
+    .monthly {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .monthly strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+      color: var(--red-dark);
+      margin-top: 4px;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .meta div {
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+    }
+
+    .meta strong {
+      font-size: 0.98rem;
+    }
+
+    .card .cta-row {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ghost-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 16px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .empty {
+      display: none;
+      padding: 28px;
+      border-radius: 24px;
+      background: white;
+      border: 1px dashed rgba(200,16,46,0.22);
+      color: var(--muted);
+      text-align: center;
+      margin: 10px 0 24px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(236,236,241,0.95);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .panel p, .panel li {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .panel ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .footer {
+      padding: 30px 0 50px;
+    }
+
+    .footer-card {
+      border-radius: 28px;
+      background: linear-gradient(135deg, #151515, #2a0c13);
+      color: white;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .footer-card p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    @media (max-width: 980px) {
+      .grid, .stats, .info-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-card { padding: 28px; }
+      .grid, .stats, .info-grid { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; align-items: stretch; }
+      .search { width: 100%; min-width: 0; }
+      .card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Página inicial">
+        <span class="brand-badge">H</span>
+        <span>Consórcio Honda</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-editar">Como editar</a>
+        <a href="#atualizacao">Atualização</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <span class="eyebrow">Tabela pública • atualização manual simples</span>
+          <h1>Catálogo elegante de consórcio pronto para GitHub Pages</h1>
+          <p>
+            Um site minimalista, editável e responsivo para apresentar modelos Honda, valor de crédito e parcelas iniciais do consórcio.
+            Tudo foi organizado para você trocar preços, links e textos em poucos minutos, sem depender de CMS.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+            <a class="btn btn-secondary" href="#como-editar">Como editar</a>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong id="stat-modelos">6</strong>
+              <span>modelos em destaque</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>arquivo único em HTML</span>
+            </div>
+            <div class="stat">
+              <strong>GitHub</strong>
+              <span>pronto para Pages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="catalogo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Catálogo de planos</h2>
+            <p>
+              Filtre por categoria e encontre rapidamente o modelo que mais combina com o cliente. Os valores abaixo ficam centralizados em uma estrutura simples para facilitar atualizações futuras.
+            </p>
+          </div>
+          <div class="search-wrap">
+            <input id="searchInput" class="search" type="text" placeholder="Buscar por modelo ou categoria" />
+          </div>
+        </div>
+
+        <div class="filters" id="filters"></div>
+        <div class="empty" id="emptyState">Nenhum modelo encontrado com esse filtro.</div>
+        <div class="grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="como-editar">
+      <div class="container info-grid">
+        <div class="panel">
+          <h3>Como editar os preços</h3>
+          <p>
+            No final do arquivo existe uma constante chamada <strong>CONSORCIO_CATALOGO</strong>. É nela que você troca nome do modelo, categoria, valor de crédito, parcela inicial, prazo, tipo de plano e link de simulação.
+          </p>
+          <p>
+            Para adicionar um novo modelo, basta duplicar um objeto existente e editar os campos. O site atualiza automaticamente os cards, filtros e contadores.
+          </p>
+        </div>
+
+        <div class="panel" id="atualizacao">
+          <h3>Fluxo ideal de atualização</h3>
+          <ul>
+            <li>Abra a tabela pública do Consórcio Honda.</li>
+            <li>Copie crédito e parcela do modelo desejado.</li>
+            <li>Atualize o objeto correspondente no HTML.</li>
+            <li>Envie o arquivo para o GitHub.</li>
+            <li>Publique no GitHub Pages.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section footer">
+      <div class="container">
+        <div class="footer-card">
+          <h3>Observações importantes</h3>
+          <p>
+            Este layout foi pensado para venda consultiva: visual limpo, leitura rápida, destaque de parcela e forte chamada para ação. Você pode personalizar WhatsApp, biografia, endereço da concessionária e depoimentos sem alterar a estrutura principal.
+          </p>
+          <p class="footer-note">
+            Valores e condições podem sofrer reajustes pela administradora, alterações do modelo referenciado e atualização de taxas administrativas e seguro prestamista, quando contratado.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // =============================
+    // CATÁLOGO EDITÁVEL
+    // Edite os dados abaixo sempre que precisar atualizar o site.
+    // =============================
+    const CONSORCIO_CATALOGO = [
+      {
+        modelo: "POP 110i ES",
+        categoria: "Street",
+        credito: 11671,
+        parcela: 194.03,
+        prazo: "Consulte simulação",
+        plano: "Entrada acessível",
+        destaque: "Popular",
+        descricao: "Ideal para quem busca economia e praticidade no dia a dia.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/pop-110i-es"
+      },
+      {
+        modelo: "BIZ 125 ES",
+        categoria: "Street",
+        credito: 14864,
+        parcela: 247.12,
+        prazo: "Consulte simulação",
+        plano: "Uso urbano",
+        destaque: "Versátil",
+        descricao: "Design funcional e ótima proposta para mobilidade urbana.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/biz-125-es"
+      },
+      {
+        modelo: "CG 160 TITAN",
+        categoria: "Street",
+        credito: 22297,
+        parcela: 370.70,
+        prazo: "Consulte simulação",
+        plano: "Alta procura",
+        destaque: "Campeã de vendas",
+        descricao: "Uma opção forte para clientes que querem visual, confiança e tradição.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/cg-160-titan"
+      },
+      {
+        modelo: "PCX CBS",
+        categoria: "Scooter",
+        credito: 20584,
+        parcela: 342.22,
+        prazo: "Consulte simulação",
+        plano: "Scooter premium",
+        destaque: "Conforto",
+        descricao: "Excelente para quem quer praticidade, estilo e pilotagem urbana confortável.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/pcx-std-cbs"
+      },
+      {
+        modelo: "NXR 160 BROS ABS",
+        categoria: "Adventure",
+        credito: 25100,
+        parcela: 417.30,
+        prazo: "Consulte simulação",
+        plano: "Uso misto",
+        destaque: "Aventura",
+        descricao: "Modelo robusto, com presença forte para cidade e estrada de chão.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/nxr-160-bros-abs"
+      },
+      {
+        modelo: "CB 300F Twister ABS",
+        categoria: "Street",
+        credito: 28284,
+        parcela: 470.23,
+        prazo: "Consulte simulação",
+        plano: "Categoria média",
+        destaque: "Esportiva",
+        descricao: "Para quem busca mais presença, potência e proposta mais premium.",
+        link: "https://www.consorcionacionalhonda.com.br/motos/cb-300f-twister-abs"
+      }
+    ];
+
+    const grid = document.getElementById("catalogGrid");
+    const filters = document.getElementById("filters");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+    const statModelos = document.getElementById("stat-modelos");
+
+    let currentFilter = "Todos";
+
+    const brl = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+
+    function uniqueCategories(data) {
+      return ["Todos", ...new Set(data.map(item => item.categoria))];
+    }
+
+    function renderFilters() {
+      filters.innerHTML = "";
+      uniqueCategories(CONSORCIO_CATALOGO).forEach(category => {
+        const button = document.createElement("button");
+        button.className = `chip ${category === currentFilter ? "active" : ""}`;
+        button.textContent = category;
+        button.addEventListener("click", () => {
+          currentFilter = category;
+          renderFilters();
+          renderCards();
+        });
+        filters.appendChild(button);
+      });
+    }
+
+    function cardTemplate(item) {
+      return `
+        <article class="card">
+          <div class="tag-row">
+            <span class="tag">${item.categoria}</span>
+            <span class="pill">${item.destaque}</span>
+          </div>
+          <h3>${item.modelo}</h3>
+          <div class="segment">${item.descricao}</div>
+          <div class="credit-label">Crédito</div>
+          <div class="credit">${brl.format(item.credito)}</div>
+          <div class="monthly">
+            <div class="monthly-label">Parcelas a partir de</div>
+            <strong>${brl.format(item.parcela)}</strong>
+          </div>
+          <div class="meta">
+            <div>
+              <span>Plano</span>
+              <strong>${item.plano}</strong>
+            </div>
+            <div>
+              <span>Prazo</span>
+              <strong>${item.prazo}</strong>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="${item.link}" target="_blank" rel="noreferrer">Simular</a>
+            <a class="ghost-link" href="#como-editar">Editar tabela</a>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCards() {
+      const term = searchInput.value.trim().toLowerCase();
+      const filtered = CONSORCIO_CATALOGO.filter(item => {
+        const matchesFilter = currentFilter === "Todos" || item.categoria === currentFilter;
+        const matchesSearch = !term || `${item.modelo} ${item.categoria} ${item.plano} ${item.destaque}`.toLowerCase().includes(term);
+        return matchesFilter && matchesSearch;
+      });
+
+      statModelos.textContent = CONSORCIO_CATALOGO.length;
+      grid.innerHTML = filtered.map(cardTemplate).join("");
+      emptyState.style.display = filtered.length ? "none" : "block";
+    }
+
+    searchInput.addEventListener("input", renderCards);
+
+    renderFilters();
+    renderCards();
+  </script>
+</body>
+</html>
